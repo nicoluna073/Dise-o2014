@@ -6,8 +6,8 @@ class Hello {
 		println("Por Sanchez Lucas")
 		Commit(1)	
 	}
-
-	def Commit (int numero) {
+	
+	def static Commit (int numero) {
 	
 	println("Commit Numero:" + numero)
 	
