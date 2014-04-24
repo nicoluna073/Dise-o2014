@@ -5,6 +5,7 @@ class Hello {
 		println("Hola Mundo")
 		println("Por Sanchez Lucas")
 		Commit(1)	
+		println("Por Luna Nicolas")
 	}
 	
 	def static Commit (int numero) {
