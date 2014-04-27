@@ -4,30 +4,52 @@ import organizadorFutbol5.Partido
 import organizadorFutbol5.Jugador
 import organizadorFutbol5.Solidaria
 import org.junit.Assert
+import organizadorFutbol5.Inscripcion
+import java.util.List
+import java.util.ArrayList
+import java.util.Arrays
+import organizadorFutbol5.Estandar
+import organizadorFutbol5.Condicional
 
 class TestPartido {
 
 	Partido partido
 	Jugador jugador
 	Solidaria solidaria
+	Estandar estandar
+	Condicional condicional
+	List<Inscripcion> inscripcionesJugadores = new ArrayList<Inscripcion>
 
 	@Before
 	def void setUp() {
 		partido = new Partido("21", "jueves")
 		jugador = new Jugador()
 		solidaria = new Solidaria()
-		
+		estandar = new Estandar()
+		condicional = new Condicional()
+
 		jugador.inscribirmeA(partido, solidaria)
+
+		inscripcionesJugadores = new ArrayList(
+			Arrays.asList(estandar, condicional, solidaria, estandar, condicional, solidaria, estandar, condicional,
+				solidaria, estandar))
+		partido.setInscripciones(inscripcionesJugadores)
 	}
 
 	@Test
 	def testHayUnaSolaInscripcion() {
-		Assert.assertEquals(partido.getInscripciones.length, 1)
+		Assert.assertEquals(partido.inscripciones.length, 10)
 	}
 
 	@Test
-	def testHayUnaSolaInscripcionYEsSolidaria() {
-		Assert.assertEquals(partido.getInscripciones.length, 1)
-		Assert.assertEquals(partido.getInscripciones.map[a | a.toString].get(0), "soy Solidaria")
+	def testAgregoUnaEstandar() {
+		Assert.assertEquals(partido.inscripciones.length, 10)
+		Assert.assertEquals(partido.inscripciones.filter[soyCondicional].length, 3)
+		Assert.assertEquals(partido.inscripciones.filter[soySolidaria].length, 3)
+		Assert.assertEquals(partido.inscripciones.filter[soyEstandar].length, 4)
+		jugador.inscribirmeA(partido, estandar)
+		Assert.assertEquals(partido.inscripciones.filter[soyCondicional].length, 2)
+		Assert.assertEquals(partido.inscripciones.filter[soySolidaria].length, 3)
+		Assert.assertEquals(partido.inscripciones.filter[soyEstandar].length, 5)
 	}
 }
