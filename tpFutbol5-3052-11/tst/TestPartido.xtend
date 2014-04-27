@@ -18,6 +18,7 @@ class TestPartido {
 	Solidaria solidaria
 	Estandar estandar
 	Condicional condicional
+	Condicional condicional1
 	List<Inscripcion> inscripcionesJugadores = new ArrayList<Inscripcion>
 
 	@Before
@@ -27,6 +28,8 @@ class TestPartido {
 		solidaria = new Solidaria()
 		estandar = new Estandar()
 		condicional = new Condicional()
+		
+		condicional1 = new Condicional([Partido partido| partido.horario == "21"])
 
 		jugador.inscribirmeA(partido, solidaria)
 
@@ -34,6 +37,7 @@ class TestPartido {
 			Arrays.asList(estandar, condicional, solidaria, estandar, condicional, solidaria, estandar, condicional,
 				solidaria, estandar))
 		partido.setInscripciones(inscripcionesJugadores)
+		
 	}
 
 	@Test
@@ -43,7 +47,6 @@ class TestPartido {
 
 	@Test
 	def testAgregoUnaEstandar() {
-		Assert.assertEquals(partido.inscripciones.length, 10)
 		Assert.assertEquals(partido.inscripciones.filter[soyCondicional].length, 3)
 		Assert.assertEquals(partido.inscripciones.filter[soySolidaria].length, 3)
 		Assert.assertEquals(partido.inscripciones.filter[soyEstandar].length, 4)
@@ -52,4 +55,10 @@ class TestPartido {
 		Assert.assertEquals(partido.inscripciones.filter[soySolidaria].length, 3)
 		Assert.assertEquals(partido.inscripciones.filter[soyEstandar].length, 5)
 	}
+	
+		@Test
+	def testCumpleCondicion() {
+		Assert.assertEquals(condicional1.cumpleCondicion(partido), true)
+	}
+	
 }

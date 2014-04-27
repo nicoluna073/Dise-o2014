@@ -4,7 +4,7 @@ import java.util.List
 import java.util.ArrayList
 
 class Partido {
-	String horario
+	@Property String horario
 	String dia
 	@Property List<Inscripcion> inscripciones = new ArrayList<Inscripcion>
 
