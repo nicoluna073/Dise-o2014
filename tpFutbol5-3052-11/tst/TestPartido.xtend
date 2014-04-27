@@ -28,6 +28,6 @@ class TestPartido {
 	@Test
 	def testHayUnaSolaInscripcionYEsSolidaria() {
 		Assert.assertEquals(partido.getInscripciones.length, 1)
-		Assert.assertEquals(partido.getInscripciones.map[toString], ["soy Solidaria"])
+		Assert.assertEquals(partido.getInscripciones.map[a | a.toString].get(0), "soy Solidaria")
 	}
 }
