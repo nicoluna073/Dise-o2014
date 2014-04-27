@@ -17,5 +17,4 @@ class Partido {
 		this.inscripciones.add(inscripcion)
 	}
 	
-
 }

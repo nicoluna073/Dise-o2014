@@ -1,8 +1,8 @@
 package organizadorFutbol5
 
-class Inscripcion {
+abstract class Inscripcion {
 	
-	Jugador jugador
+	Jugador jugador // por esto es statefull ?
 	
 	def inscribirmeSiPuedo(Partido partido){
 		if(partido.inscripciones.length < 10){
