@@ -1,30 +1,20 @@
 package organizadorFutbol5
 
+import java.util.List
+
 class Partido {
- public String Horario
- public String Dia
+	String horario
+	String dia
+	@Property List<Inscripcion> inscripciones
+	
+	new(String horario, String dia) {
+		this.horario = horario
+		this.dia = dia
+	}
+	
+	def agregarInscripcion(Inscripcion inscripcion) {
+		this.inscripciones.add(inscripcion)
+	}
+	
 
-//new( String Horario ) {
-
- //this.Horario = Horario
-
- //}
- 
-  def getHorario() {
-  	this.Horario
-  }
- 
- def setHorario(String Hora){
- 	this.Horario= Hora
- }
-
-  def getDia() {
-  	this.Dia
-  }
- 
- def setDia(String Dia){
- 	this.Dia= Dia
- }
-
- 
-  }
+}
