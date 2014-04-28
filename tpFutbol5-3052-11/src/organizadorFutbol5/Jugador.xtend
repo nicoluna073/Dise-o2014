@@ -7,7 +7,7 @@ class Jugador {
 		
 	}
 	
-	def inscribirmeA(Partido partido, Inscripcion inscripcion){
-		inscripcion.inscribirA(this, partido)
+	def inscribirmeA(Partido partido, TipoInscripcion tipoInscripcion){
+		new Inscripcion().inscribirA(this, partido, tipoInscripcion)
 	}
 }

@@ -4,8 +4,8 @@ import java.util.List
 import java.util.ArrayList
 
 class Partido {
-	@Property String horario
-	String dia
+	@Property String horario // TODO: Pasarlo a date?
+	@Property String dia // TODO: Pasarlo a date?
 	@Property List<Inscripcion> inscripciones = new ArrayList<Inscripcion>
 
 	new(String horario, String dia) {
@@ -18,19 +18,19 @@ class Partido {
 	}
 
 	def eliminarPrimerCondicional() {
-		this.inscripciones.remove(this.inscripciones.findFirst[soyCondicional])
+		this.inscripciones.remove(this.inscripciones.findFirst[tipoInscripcion.soyCondicional])
 	}
 
 	def boolean hayCondicional() {
-		this.inscripciones.exists[soyCondicional]
+		this.inscripciones.exists[tipoInscripcion.soyCondicional]
 	}
 	
 	def boolean haySolidaria() {
-		this.inscripciones.exists[soySolidaria]
+		this.inscripciones.exists[tipoInscripcion.soySolidaria]
 	}
 	
 	def eliminarPrimerSolidario() {
-		this.inscripciones.remove(this.inscripciones.findFirst[soySolidaria])
+		this.inscripciones.remove(this.inscripciones.findFirst[tipoInscripcion.soySolidaria])
 	}
 
 }

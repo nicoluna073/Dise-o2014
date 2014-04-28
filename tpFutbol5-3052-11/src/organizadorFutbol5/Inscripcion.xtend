@@ -1,30 +1,12 @@
 package organizadorFutbol5
 
-abstract class Inscripcion {
+class Inscripcion {
+	@Property TipoInscripcion tipoInscripcion
+	Jugador jugador
 
-	Jugador jugador // por esto es statefull ?
-
-	def inscribirmeSiPuedo(Partido partido) {
-		if (partido.inscripciones.length < 10 && this.cumpleCondicion(partido)) {
-			partido.agregarInscripcion(this)
-		} else {
-			this.inscribirmeSegunInscripcion(partido)
-		}
-	}
-
-	def boolean cumpleCondicion(Partido partido) {
-		true
-	}
-
-	def void inscribirmeSegunInscripcion(Partido partido) {
-	}
-
-	def inscribirA(Jugador jugador, Partido partido) {
+	def inscribirA(Jugador jugador, Partido partido, TipoInscripcion tipoInscripcion) {
 		this.jugador = jugador
-		this.inscribirmeSiPuedo(partido)
+		this.tipoInscripcion = tipoInscripcion
+		tipoInscripcion.inscribirmeSiPuedo(partido, this)
 	}
-	
-	def soyEstandar(){false}
-	def soySolidaria(){false}
-	def soyCondicional(){false}
 }

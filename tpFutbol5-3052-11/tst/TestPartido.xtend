@@ -18,8 +18,12 @@ class TestPartido {
 	Solidaria solidaria
 	Estandar estandar
 	Condicional condicional
-	Condicional condicional1
-	List<Inscripcion> inscripcionesJugadores = new ArrayList<Inscripcion>
+	Condicional condicionalNoCumple
+	List<Inscripcion> inscripcionesJugadoresCon10 = new ArrayList<Inscripcion>
+	List<Inscripcion> inscripcionesJugadoresCon9 = new ArrayList<Inscripcion>
+	Inscripcion inscripcionSolidaria = new Inscripcion()
+	Inscripcion inscripcionEstandar = new Inscripcion()
+	Inscripcion inscripcionCondicional = new Inscripcion()
 
 	@Before
 	def void setUp() {
@@ -27,38 +31,91 @@ class TestPartido {
 		jugador = new Jugador()
 		solidaria = new Solidaria()
 		estandar = new Estandar()
-		condicional = new Condicional()
-		
-		condicional1 = new Condicional([Partido partido| partido.horario == "21"])
+
+		condicional = new Condicional([Partido partido|partido.horario == "21"])
+		condicionalNoCumple = new Condicional([Partido partido|partido.dia == "miercoles"])
 
 		jugador.inscribirmeA(partido, solidaria)
+		inscripcionEstandar.setTipoInscripcion(estandar)
+		inscripcionCondicional.setTipoInscripcion(condicional)
+		inscripcionSolidaria.setTipoInscripcion(solidaria)
 
-		inscripcionesJugadores = new ArrayList(
-			Arrays.asList(estandar, condicional, solidaria, estandar, condicional, solidaria, estandar, condicional,
-				solidaria, estandar))
-		partido.setInscripciones(inscripcionesJugadores)
-		
-	}
+		inscripcionesJugadoresCon10 = new ArrayList(
+			Arrays.asList(inscripcionEstandar, inscripcionCondicional, inscripcionSolidaria, inscripcionEstandar,
+				inscripcionCondicional, inscripcionSolidaria, inscripcionEstandar, inscripcionCondicional,
+				inscripcionSolidaria, inscripcionEstandar))
 
-	@Test
-	def testHayUnaSolaInscripcion() {
-		Assert.assertEquals(partido.inscripciones.length, 10)
+		inscripcionesJugadoresCon9 = new ArrayList(
+			Arrays.asList(inscripcionEstandar, inscripcionCondicional, inscripcionSolidaria, inscripcionEstandar,
+				inscripcionCondicional, inscripcionSolidaria, inscripcionEstandar, inscripcionCondicional,
+				inscripcionSolidaria))
+		partido.setInscripciones(inscripcionesJugadoresCon10)	
+
 	}
 
 	@Test
 	def testAgregoUnaEstandar() {
-		Assert.assertEquals(partido.inscripciones.filter[soyCondicional].length, 3)
-		Assert.assertEquals(partido.inscripciones.filter[soySolidaria].length, 3)
-		Assert.assertEquals(partido.inscripciones.filter[soyEstandar].length, 4)
+		Assert.assertEquals(partido.inscripciones.filter[tipoInscripcion.soyCondicional].length, 3)
+		Assert.assertEquals(partido.inscripciones.filter[tipoInscripcion.soySolidaria].length, 3)
+		Assert.assertEquals(partido.inscripciones.filter[tipoInscripcion.soyEstandar].length, 4)
 		jugador.inscribirmeA(partido, estandar)
-		Assert.assertEquals(partido.inscripciones.filter[soyCondicional].length, 2)
-		Assert.assertEquals(partido.inscripciones.filter[soySolidaria].length, 3)
-		Assert.assertEquals(partido.inscripciones.filter[soyEstandar].length, 5)
+		Assert.assertEquals(partido.inscripciones.filter[tipoInscripcion.soyCondicional].length, 2)
+		Assert.assertEquals(partido.inscripciones.filter[tipoInscripcion.soySolidaria].length, 3)
+		Assert.assertEquals(partido.inscripciones.filter[tipoInscripcion.soyEstandar].length, 5)
 	}
-	
-		@Test
-	def testCumpleCondicion() {
-		Assert.assertEquals(condicional1.cumpleCondicion(partido), true)
+
+	@Test
+	def testAgregoUnaSolidaria() {
+		Assert.assertEquals(partido.inscripciones.filter[tipoInscripcion.soyCondicional].length, 3)
+		Assert.assertEquals(partido.inscripciones.filter[tipoInscripcion.soySolidaria].length, 3)
+		Assert.assertEquals(partido.inscripciones.filter[tipoInscripcion.soyEstandar].length, 4)
+		jugador.inscribirmeA(partido, solidaria)
+		Assert.assertEquals(partido.inscripciones.filter[tipoInscripcion.soyCondicional].length, 2)
+		Assert.assertEquals(partido.inscripciones.filter[tipoInscripcion.soySolidaria].length, 4)
+		Assert.assertEquals(partido.inscripciones.filter[tipoInscripcion.soyEstandar].length, 4)
 	}
-	
+
+	@Test
+	def testNoAgregoUnaCondicionalPorqueNoHayEspacioParaEl() {
+		Assert.assertEquals(partido.inscripciones.filter[tipoInscripcion.soyCondicional].length, 3)
+		Assert.assertEquals(partido.inscripciones.filter[tipoInscripcion.soySolidaria].length, 3)
+		Assert.assertEquals(partido.inscripciones.filter[tipoInscripcion.soyEstandar].length, 4)
+		jugador.inscribirmeA(partido, condicional)
+		Assert.assertEquals(partido.inscripciones.filter[tipoInscripcion.soyCondicional].length, 3)
+		Assert.assertEquals(partido.inscripciones.filter[tipoInscripcion.soySolidaria].length, 3)
+		Assert.assertEquals(partido.inscripciones.filter[tipoInscripcion.soyEstandar].length, 4)
+	}
+
+	@Test
+	def testAgregoUnaEstandarTeniendoMenosDeDiezParticipantes() {
+		partido.setInscripciones(inscripcionesJugadoresCon9)
+		Assert.assertEquals(partido.inscripciones.length, 9)
+		jugador.inscribirmeA(partido, estandar)
+		Assert.assertEquals(partido.inscripciones.length, 10)
+	}
+
+	@Test
+	def testAgregoUnaSolidariaTeniendoMenosDeDiezParticipantes() {
+		partido.setInscripciones(inscripcionesJugadoresCon9)
+		Assert.assertEquals(partido.inscripciones.length, 9)
+		jugador.inscribirmeA(partido, solidaria)
+		Assert.assertEquals(partido.inscripciones.length, 10)
+	}
+
+	@Test
+	def testAgregoUnaCondicionalTeniendoMenosDeDiezParticipantes() {
+		partido.setInscripciones(inscripcionesJugadoresCon9)
+		Assert.assertEquals(partido.inscripciones.length, 9)
+		jugador.inscribirmeA(partido, condicional)
+		Assert.assertEquals(partido.inscripciones.length, 10)
+	}
+
+	@Test
+	def testNoAgregoCondicionalPorqueNoCumpleCondicion() {
+		partido.setInscripciones(inscripcionesJugadoresCon9)
+		Assert.assertEquals(partido.inscripciones.length, 9)
+		jugador.inscribirmeA(partido, condicionalNoCumple)
+		Assert.assertEquals(partido.inscripciones.length, 9)
+	}
+
 }

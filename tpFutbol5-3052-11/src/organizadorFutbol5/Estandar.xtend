@@ -1,14 +1,14 @@
 package organizadorFutbol5
 
-class Estandar extends Inscripcion{
+class Estandar extends TipoInscripcion{
 	
-	override def void inscribirmeSegunInscripcion(Partido partido){
+	override def void inscribirmeSegunInscripcion(Partido partido, Inscripcion inscripcion){
 		if(partido.hayCondicional()){
 			partido.eliminarPrimerCondicional()
-			partido.agregarInscripcion(this)
+			partido.agregarInscripcion(inscripcion)
 		}else if (partido.haySolidaria()){
 			partido.eliminarPrimerSolidario()
-			partido.agregarInscripcion(this)
+			partido.agregarInscripcion(inscripcion)
 		}
 	}
 	
