@@ -1,6 +1,6 @@
 package organizadorFutbol5
 
-class Condicional extends TipoInscripcion {
+class Condicional extends Inscripcion {
 
 	(Partido)=>boolean condicion
 

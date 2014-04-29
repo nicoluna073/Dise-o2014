@@ -1,11 +1,11 @@
 package organizadorFutbol5
 
-class Solidaria extends TipoInscripcion {
+class Solidaria extends Inscripcion {
 
-	override def void inscribirmeSegunInscripcion(Partido partido, Inscripcion inscripcion) {
+	override def void inscribirmeSegunInscripcion(Partido partido, Jugador jugador) {
 		if (partido.hayCondicional()) {
 			partido.eliminarPrimerCondicional()
-			partido.agregarInscripcion(inscripcion)
+			partido.agregarJugador(jugador)
 		}
 	}
 

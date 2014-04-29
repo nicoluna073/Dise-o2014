@@ -6,31 +6,31 @@ import java.util.ArrayList
 class Partido {
 	@Property String horario // TODO: Pasarlo a date?
 	@Property String dia // TODO: Pasarlo a date?
-	@Property List<Inscripcion> inscripciones = new ArrayList<Inscripcion>
+	@Property List<Jugador> jugadores = new ArrayList<Jugador>
 
 	new(String horario, String dia) {
 		this.horario = horario
 		this.dia = dia
 	}
 
-	def agregarInscripcion(Inscripcion inscripcion) {
-		this.inscripciones.add(inscripcion)
+	def agregarJugador(Jugador jugador) {
+		this.jugadores.add(jugador)
 	}
 
 	def eliminarPrimerCondicional() {
-		this.inscripciones.remove(this.inscripciones.findFirst[tipoInscripcion.soyCondicional])
+		this.jugadores.remove(this.jugadores.findFirst[tipoInscripcion.soyCondicional])
 	}
 
 	def boolean hayCondicional() {
-		this.inscripciones.exists[tipoInscripcion.soyCondicional]
+		this.jugadores.exists[tipoInscripcion.soyCondicional]
 	}
 	
 	def boolean haySolidaria() {
-		this.inscripciones.exists[tipoInscripcion.soySolidaria]
+		this.jugadores.exists[tipoInscripcion.soySolidaria]
 	}
 	
 	def eliminarPrimerSolidario() {
-		this.inscripciones.remove(this.inscripciones.findFirst[tipoInscripcion.soySolidaria])
+		this.jugadores.remove(this.jugadores.findFirst[tipoInscripcion.soySolidaria])
 	}
 
 }
