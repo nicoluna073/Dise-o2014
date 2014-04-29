@@ -1,23 +1,12 @@
 package organizadorFutbol5
 
-abstract class Inscripcion {
+interface Inscripcion {
 
-	def inscribirmeSiPuedo(Partido partido, Jugador jugador) {
-		if (partido.jugadores.length < 10 && this.cumpleCondicion(partido)) {
-			partido.agregarJugador(jugador)
-		} else {
-			this.inscribirmeSegunInscripcion(partido, jugador)
-		}
-	}
-
-	def boolean cumpleCondicion(Partido partido) {
-		true
-	}
-
-	def void inscribirmeSegunInscripcion(Partido partido, Jugador jugador) {
-	}
+	def void inscribirmeSiPuedo(Partido partido, Jugador jugador)
+	def void inscribirmeSegunInscripcion(Partido partido, Jugador jugador)
+	def boolean soySolidaria()
+	def boolean soyCondicional()
+	def boolean soyEstandar()
+	def boolean cumpleCondicion(Partido partido)
 	
-	def soyEstandar(){false}
-	def soySolidaria(){false}
-	def soyCondicional(){false}
 }
