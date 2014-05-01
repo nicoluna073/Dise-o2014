@@ -1,7 +1,7 @@
 package organizadorFutbol5
 
-class Estandar extends Inscripcion{
-	override toString(){
-		"soy Estandar"
+class Estandar extends TipoInscripcion{
+	override queTipoSos(){
+		"Estandar"
 	}
 }
