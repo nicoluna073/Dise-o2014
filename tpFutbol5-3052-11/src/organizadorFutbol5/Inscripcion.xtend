@@ -8,5 +8,5 @@ class Inscripcion {
 		this.tipoInscripcion = tipo
 		this.jugador = jugadorAinscribir
 	} 
-		
+	
 }

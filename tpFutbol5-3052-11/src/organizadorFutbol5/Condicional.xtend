@@ -1,6 +1,7 @@
 package organizadorFutbol5
 
 class Condicional extends TipoInscripcion{
+	
 	override queTipoSos(){
 		"Condicional"
 	}
@@ -14,7 +15,7 @@ class Condicional extends TipoInscripcion{
 		this.condicion = condicion
 	}
 
-	override def boolean cumpleCondicion(Partido partido) {
+	def boolean cumpleCondicion(Partido partido) {
 		this.condicion.apply(partido)
 	}
 
