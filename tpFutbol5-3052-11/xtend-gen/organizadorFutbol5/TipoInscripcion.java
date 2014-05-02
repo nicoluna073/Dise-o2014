@@ -1,16 +1,13 @@
 package organizadorFutbol5;
 
+import com.google.common.base.Objects;
+import organizadorFutbol5.Partido;
+
 @SuppressWarnings("all")
 public abstract class TipoInscripcion {
-  public Boolean sosEstandar() {
-    return Boolean.valueOf(false);
-  }
+  private final String tipo = "TipoInscripcion";
   
-  public Boolean sosSolidaria() {
-    return Boolean.valueOf(false);
-  }
-  
-  public Boolean sosCondicional() {
-    return Boolean.valueOf(false);
+  public boolean confirmate(final String tipo, final Partido partido) {
+    return Objects.equal(this.tipo, tipo);
   }
 }

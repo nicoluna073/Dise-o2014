@@ -1,6 +1,7 @@
 package organizadorFutbol5;
 
 import organizadorFutbol5.Jugador;
+import organizadorFutbol5.Partido;
 import organizadorFutbol5.TipoInscripcion;
 
 @SuppressWarnings("all")
@@ -28,5 +29,10 @@ public class Inscripcion {
   public Inscripcion(final Jugador jugadorAinscribir, final TipoInscripcion tipo) {
     this.setTipoInscripcion(tipo);
     this.setJugador(jugadorAinscribir);
+  }
+  
+  public boolean sosValida(final String tipo, final Partido partido) {
+    TipoInscripcion _tipoInscripcion = this.getTipoInscripcion();
+    return _tipoInscripcion.confirmate(tipo, partido);
   }
 }
