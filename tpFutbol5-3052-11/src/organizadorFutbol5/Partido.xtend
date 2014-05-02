@@ -5,29 +5,37 @@ import java.util.ArrayList
 
 class Partido {
 	@Property String dia
-	@Property String hora
+	@Property String horario
 	@Property String lugar
-	@Property Integer cantidadMaximaJugadores //aca va una variable de clase, no se como se declara
+	@Property Integer cantidadMaximaJugadores = 10 //aca va una variable de clase, no se como se declara
 	@Property List<Inscripcion> inscripciones = new ArrayList<Inscripcion>
-	
-	def asociarJugadorAEquipo(Jugador Jugador, Equipo equipo){
 		
+	new(String horario, String dia) {
+		this.horario = horario
+		this.dia = dia
+	}
+	
+	def agregarInscripcion(Inscripcion inscripcion) {
+		this.inscripciones.add(inscripcion)
 	}
 	
 	def inscribirA(Jugador jugador, TipoInscripcion tipo){
 		if(this.inscripcionIncompleta){
-			this.inscripciones.add(new Inscripcion(jugador, tipo))
+			this.agregarInscripcion(new Inscripcion(jugador, tipo))
 		}
 	}
 	
 	def inscripcionIncompleta(){
-		(this.inscripciones.filter( inscripcion | inscripcion.tipoInscripcion.sosEstandar())).size
-																	< this.cantidadMaximaJugadores
+		(this.inscripcionesDeTipo("Estandar", this)).size < this.cantidadMaximaJugadores
+	}
+
+	def armarListaCandidatos(){  
+		((this.inscripcionesDeTipo("Estandar", this)) +
+		(this.inscripcionesDeTipo("Solidaria", this)) +
+		(this.inscripcionesDeTipo("Condicional", this))).take(10)
 	}
 	
-	def armarListaCandidatos(){
-		((this.inscripciones.filter( inscripcion | inscripcion.tipoInscripcion.sosEstandar())) +
-		(this.inscripciones.filter( inscripcion | inscripcion.tipoInscripcion.sosSolidaria())) +
-		(this.inscripciones.filter( inscripcion | inscripcion.tipoInscripcion.sosCondicional()))).take(10)
+	def inscripcionesDeTipo(String tipo, Partido partido){
+		this.inscripciones.filter( inscripcion | inscripcion.sosValida(tipo, partido))
 	}
 }

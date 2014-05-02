@@ -1,7 +1,11 @@
 package organizadorFutbol5
 
 abstract class TipoInscripcion {
-	def Boolean sosEstandar(){ false }
-	def Boolean sosSolidaria(){ false }
-	def Boolean sosCondicional(){ false }
+
+	val tipo = "TipoInscripcion"
+		
+	def boolean confirmate(String tipo, Partido partido){
+		this.tipo == tipo 
+	}
+
 }
