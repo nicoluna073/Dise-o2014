@@ -9,53 +9,16 @@ import organizadorFutbol5.Condicional
 import organizadorFutbol5.Estandar
 import organizadorFutbol5.Inscripcion
 import java.util.Arrays
+import TestJugador
 
 class TestPartido {
 
-	Partido partido
-	Jugador jugador1
-	Jugador jugador2
-	Jugador jugador3
-	Jugador jugador4
-	Jugador jugador5
-	Jugador jugador6
-	Jugador jugador7
-	Jugador jugador8
-	Jugador jugador9
-	Jugador jugador10
-	Jugador jugador11
-	Jugador jugador12
-	Jugador jugador13
-	Jugador jugador14
-	Jugador jugador15
-	Jugador jugador16
-	Jugador jugador17
-	Solidaria solidaria
-	Estandar estandar
-	Condicional condicional
-	Condicional condicional1
-	List<Inscripcion> inscripcionesJugadores = new ArrayList<Inscripcion>
 
 	@Before
 	def void setUp() {
 		partido = new Partido("21", "jueves")
-		jugador1 = new Jugador()
-		jugador2 = new Jugador()
-		jugador3 = new Jugador()
-		jugador4 = new Jugador()
-		jugador5 = new Jugador()
-		jugador6 = new Jugador()
-		jugador7 = new Jugador()
-		jugador8 = new Jugador()
-		jugador9 = new Jugador()
-		jugador10 = new Jugador()
-		jugador11 = new Jugador()
-		jugador12 = new Jugador()
-		jugador13 = new Jugador()
-		jugador14 = new Jugador()
-		jugador15 = new Jugador()
-		jugador16 = new Jugador()
-		jugador17 = new Jugador()
+
+
 		solidaria = new Solidaria()
 		estandar = new Estandar()
 		condicional = new Condicional()
