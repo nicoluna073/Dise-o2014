@@ -6,6 +6,7 @@ import java.util.ArrayList
 class Partido {
 	@Property String dia
 	@Property String horario
+	@Property String lugar
 	final static val CANTIDAD_MAX_JUGADORES = 10
 	@Property List<Inscripcion> inscripciones //TODO: cambiar a Set?
 	AdminObserver administrador = new AdminObserver
@@ -13,6 +14,13 @@ class Partido {
 	new(String horario, String dia) {
 		this.horario = horario
 		this.dia = dia
+		this.inscripciones = new ArrayList<Inscripcion>
+	}
+	
+	new(String horario, String dia, String lugar) {
+		this.horario = horario
+		this.dia = dia
+		this.lugar = lugar
 		this.inscripciones = new ArrayList<Inscripcion>
 	}
 

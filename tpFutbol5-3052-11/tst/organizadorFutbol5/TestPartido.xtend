@@ -15,7 +15,7 @@ import java.util.Arrays
 import organizadorFutbol5.Estandar
 import organizadorFutbol5.Condicional
 
-class TestPartido {
+class TestPartido extends Futbol5TestCase{
 
 	Partido partido
 	Jugador jugador
@@ -31,7 +31,8 @@ class TestPartido {
 	Inscripcion inscripcionCondicional = new Inscripcion()
 
 	@Before
-	def void setUp() {
+	override def void setUp() {
+		super.setUp()
 		partido = new Partido("21", "jueves")
 		jugador = new Jugador()
 		solidaria = new Solidaria()

@@ -7,10 +7,18 @@ class Jugador {
 	
 	@Property List<Jugador> amigos = new ArrayList<Jugador>
 	
-	AmigoObserver amigoObserver = new AmigoObserver
+	@Property int edad
+	@Property String nombre
 	
-	List<Infraccion> infracciones = new ArrayList<Infraccion>
+	@Property AmigoObserver amigoObserver = new AmigoObserver
 	
+	@Property List<Infraccion> infracciones = new ArrayList<Infraccion>
+	
+	new(){}
+	new(String nombre, int edad){
+		this.nombre = nombre
+		this.edad = edad
+	}
 	def estaPenalizado(){
 		
 	}
