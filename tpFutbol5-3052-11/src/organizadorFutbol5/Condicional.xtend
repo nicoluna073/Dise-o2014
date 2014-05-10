@@ -2,9 +2,8 @@ package organizadorFutbol5
 
 class Condicional extends TipoInscripcion{
 	
-	val tipo = "Condicional"
-	
 	(Partido) => boolean condicion
+	Tipo tipo = Tipo.CONDICIONAL
 
 	new (){
 	}
@@ -17,7 +16,9 @@ class Condicional extends TipoInscripcion{
 		this.condicion.apply(partido)
 	}
 	
-	override confirmate(String tipo, Partido partido){
+	override confirmate(Tipo tipo, Partido partido){
 		tipo==this.tipo && cumpleCondicion(partido)
+		//super.confirmate(tipo, partido) && cumpleCondicion(partido)
 	}
+
 }
